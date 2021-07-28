@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package syncdeps;
+
+option go_package = "github.com/mkieweg/syncdeps/api/go/syncdeps";
+
+message Version {
+    uint64 Major = 1;
+    uint64 Minor = 2;
+    uint64 Patch = 3;
+    uint64 Timestamp = 4;
+    string Revision = 5;
+    string PreReleaseID = 6;
+}
+
+message Dependency {
+    string Name = 1;
+    Version Version = 2;
+}
+
+message Dependencies {
+    repeated Dependency Dependency = 1;
+}
