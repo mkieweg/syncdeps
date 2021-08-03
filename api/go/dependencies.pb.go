@@ -20,106 +20,19 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type Version struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Major        uint64 `protobuf:"varint,1,opt,name=Major,proto3" json:"Major,omitempty"`
-	Minor        uint64 `protobuf:"varint,2,opt,name=Minor,proto3" json:"Minor,omitempty"`
-	Patch        uint64 `protobuf:"varint,3,opt,name=Patch,proto3" json:"Patch,omitempty"`
-	Timestamp    uint64 `protobuf:"varint,4,opt,name=Timestamp,proto3" json:"Timestamp,omitempty"`
-	Revision     string `protobuf:"bytes,5,opt,name=Revision,proto3" json:"Revision,omitempty"`
-	PreReleaseID string `protobuf:"bytes,6,opt,name=PreReleaseID,proto3" json:"PreReleaseID,omitempty"`
-}
-
-func (x *Version) Reset() {
-	*x = Version{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_dependencies_proto_msgTypes[0]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *Version) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Version) ProtoMessage() {}
-
-func (x *Version) ProtoReflect() protoreflect.Message {
-	mi := &file_dependencies_proto_msgTypes[0]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Version.ProtoReflect.Descriptor instead.
-func (*Version) Descriptor() ([]byte, []int) {
-	return file_dependencies_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *Version) GetMajor() uint64 {
-	if x != nil {
-		return x.Major
-	}
-	return 0
-}
-
-func (x *Version) GetMinor() uint64 {
-	if x != nil {
-		return x.Minor
-	}
-	return 0
-}
-
-func (x *Version) GetPatch() uint64 {
-	if x != nil {
-		return x.Patch
-	}
-	return 0
-}
-
-func (x *Version) GetTimestamp() uint64 {
-	if x != nil {
-		return x.Timestamp
-	}
-	return 0
-}
-
-func (x *Version) GetRevision() string {
-	if x != nil {
-		return x.Revision
-	}
-	return ""
-}
-
-func (x *Version) GetPreReleaseID() string {
-	if x != nil {
-		return x.PreReleaseID
-	}
-	return ""
-}
-
 type Dependency struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name    string   `protobuf:"bytes,1,opt,name=Name,proto3" json:"Name,omitempty"`
-	Version *Version `protobuf:"bytes,2,opt,name=Version,proto3" json:"Version,omitempty"`
+	Name    string `protobuf:"bytes,1,opt,name=Name,proto3" json:"Name,omitempty"`
+	Version string `protobuf:"bytes,2,opt,name=Version,proto3" json:"Version,omitempty"`
 }
 
 func (x *Dependency) Reset() {
 	*x = Dependency{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dependencies_proto_msgTypes[1]
+		mi := &file_dependencies_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -132,7 +45,7 @@ func (x *Dependency) String() string {
 func (*Dependency) ProtoMessage() {}
 
 func (x *Dependency) ProtoReflect() protoreflect.Message {
-	mi := &file_dependencies_proto_msgTypes[1]
+	mi := &file_dependencies_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -145,7 +58,7 @@ func (x *Dependency) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Dependency.ProtoReflect.Descriptor instead.
 func (*Dependency) Descriptor() ([]byte, []int) {
-	return file_dependencies_proto_rawDescGZIP(), []int{1}
+	return file_dependencies_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Dependency) GetName() string {
@@ -155,11 +68,11 @@ func (x *Dependency) GetName() string {
 	return ""
 }
 
-func (x *Dependency) GetVersion() *Version {
+func (x *Dependency) GetVersion() string {
 	if x != nil {
 		return x.Version
 	}
-	return nil
+	return ""
 }
 
 type Dependencies struct {
@@ -167,13 +80,15 @@ type Dependencies struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Dependency []*Dependency `protobuf:"bytes,1,rep,name=Dependency,proto3" json:"Dependency,omitempty"`
+	ModuleName string        `protobuf:"bytes,1,opt,name=ModuleName,proto3" json:"ModuleName,omitempty"`
+	GoVersion  string        `protobuf:"bytes,2,opt,name=GoVersion,proto3" json:"GoVersion,omitempty"`
+	Dependency []*Dependency `protobuf:"bytes,3,rep,name=Dependency,proto3" json:"Dependency,omitempty"`
 }
 
 func (x *Dependencies) Reset() {
 	*x = Dependencies{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_dependencies_proto_msgTypes[2]
+		mi := &file_dependencies_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -186,7 +101,7 @@ func (x *Dependencies) String() string {
 func (*Dependencies) ProtoMessage() {}
 
 func (x *Dependencies) ProtoReflect() protoreflect.Message {
-	mi := &file_dependencies_proto_msgTypes[2]
+	mi := &file_dependencies_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -199,7 +114,21 @@ func (x *Dependencies) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Dependencies.ProtoReflect.Descriptor instead.
 func (*Dependencies) Descriptor() ([]byte, []int) {
-	return file_dependencies_proto_rawDescGZIP(), []int{2}
+	return file_dependencies_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *Dependencies) GetModuleName() string {
+	if x != nil {
+		return x.ModuleName
+	}
+	return ""
+}
+
+func (x *Dependencies) GetGoVersion() string {
+	if x != nil {
+		return x.GoVersion
+	}
+	return ""
 }
 
 func (x *Dependencies) GetDependency() []*Dependency {
@@ -213,25 +142,17 @@ var File_dependencies_proto protoreflect.FileDescriptor
 
 var file_dependencies_proto_rawDesc = []byte{
 	0x0a, 0x12, 0x64, 0x65, 0x70, 0x65, 0x6e, 0x64, 0x65, 0x6e, 0x63, 0x69, 0x65, 0x73, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x12, 0x08, 0x73, 0x79, 0x6e, 0x63, 0x64, 0x65, 0x70, 0x73, 0x22, 0xa9,
-	0x01, 0x0a, 0x07, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x14, 0x0a, 0x05, 0x4d, 0x61,
-	0x6a, 0x6f, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x05, 0x4d, 0x61, 0x6a, 0x6f, 0x72,
-	0x12, 0x14, 0x0a, 0x05, 0x4d, 0x69, 0x6e, 0x6f, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52,
-	0x05, 0x4d, 0x69, 0x6e, 0x6f, 0x72, 0x12, 0x14, 0x0a, 0x05, 0x50, 0x61, 0x74, 0x63, 0x68, 0x18,
-	0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x05, 0x50, 0x61, 0x74, 0x63, 0x68, 0x12, 0x1c, 0x0a, 0x09,
-	0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x52,
-	0x09, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x12, 0x1a, 0x0a, 0x08, 0x52, 0x65,
-	0x76, 0x69, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x52, 0x65,
-	0x76, 0x69, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x22, 0x0a, 0x0c, 0x50, 0x72, 0x65, 0x52, 0x65, 0x6c,
-	0x65, 0x61, 0x73, 0x65, 0x49, 0x44, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x50, 0x72,
-	0x65, 0x52, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x49, 0x44, 0x22, 0x4d, 0x0a, 0x0a, 0x44, 0x65,
-	0x70, 0x65, 0x6e, 0x64, 0x65, 0x6e, 0x63, 0x79, 0x12, 0x12, 0x0a, 0x04, 0x4e, 0x61, 0x6d, 0x65,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x2b, 0x0a, 0x07,
-	0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x11, 0x2e,
-	0x73, 0x79, 0x6e, 0x63, 0x64, 0x65, 0x70, 0x73, 0x2e, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e,
-	0x52, 0x07, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x22, 0x44, 0x0a, 0x0c, 0x44, 0x65, 0x70,
-	0x65, 0x6e, 0x64, 0x65, 0x6e, 0x63, 0x69, 0x65, 0x73, 0x12, 0x34, 0x0a, 0x0a, 0x44, 0x65, 0x70,
-	0x65, 0x6e, 0x64, 0x65, 0x6e, 0x63, 0x79, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x14, 0x2e,
+	0x72, 0x6f, 0x74, 0x6f, 0x12, 0x08, 0x73, 0x79, 0x6e, 0x63, 0x64, 0x65, 0x70, 0x73, 0x22, 0x3a,
+	0x0a, 0x0a, 0x44, 0x65, 0x70, 0x65, 0x6e, 0x64, 0x65, 0x6e, 0x63, 0x79, 0x12, 0x12, 0x0a, 0x04,
+	0x4e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x4e, 0x61, 0x6d, 0x65,
+	0x12, 0x18, 0x0a, 0x07, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x07, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x22, 0x82, 0x01, 0x0a, 0x0c, 0x44,
+	0x65, 0x70, 0x65, 0x6e, 0x64, 0x65, 0x6e, 0x63, 0x69, 0x65, 0x73, 0x12, 0x1e, 0x0a, 0x0a, 0x4d,
+	0x6f, 0x64, 0x75, 0x6c, 0x65, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x0a, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x47,
+	0x6f, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09,
+	0x47, 0x6f, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x34, 0x0a, 0x0a, 0x44, 0x65, 0x70,
+	0x65, 0x6e, 0x64, 0x65, 0x6e, 0x63, 0x79, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x14, 0x2e,
 	0x73, 0x79, 0x6e, 0x63, 0x64, 0x65, 0x70, 0x73, 0x2e, 0x44, 0x65, 0x70, 0x65, 0x6e, 0x64, 0x65,
 	0x6e, 0x63, 0x79, 0x52, 0x0a, 0x44, 0x65, 0x70, 0x65, 0x6e, 0x64, 0x65, 0x6e, 0x63, 0x79, 0x42,
 	0x2d, 0x5a, 0x2b, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6d, 0x6b,
@@ -252,20 +173,18 @@ func file_dependencies_proto_rawDescGZIP() []byte {
 	return file_dependencies_proto_rawDescData
 }
 
-var file_dependencies_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_dependencies_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_dependencies_proto_goTypes = []interface{}{
-	(*Version)(nil),      // 0: syncdeps.Version
-	(*Dependency)(nil),   // 1: syncdeps.Dependency
-	(*Dependencies)(nil), // 2: syncdeps.Dependencies
+	(*Dependency)(nil),   // 0: syncdeps.Dependency
+	(*Dependencies)(nil), // 1: syncdeps.Dependencies
 }
 var file_dependencies_proto_depIdxs = []int32{
-	0, // 0: syncdeps.Dependency.Version:type_name -> syncdeps.Version
-	1, // 1: syncdeps.Dependencies.Dependency:type_name -> syncdeps.Dependency
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	0, // 0: syncdeps.Dependencies.Dependency:type_name -> syncdeps.Dependency
+	1, // [1:1] is the sub-list for method output_type
+	1, // [1:1] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_dependencies_proto_init() }
@@ -275,18 +194,6 @@ func file_dependencies_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_dependencies_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Version); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_dependencies_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Dependency); i {
 			case 0:
 				return &v.state
@@ -298,7 +205,7 @@ func file_dependencies_proto_init() {
 				return nil
 			}
 		}
-		file_dependencies_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+		file_dependencies_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Dependencies); i {
 			case 0:
 				return &v.state
@@ -317,7 +224,7 @@ func file_dependencies_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_dependencies_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
