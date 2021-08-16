@@ -27,7 +27,7 @@ func extractHighestVersion(b, t map[string][]semver.Version) []Dependency {
 	return nil
 }
 
-func checkAndAdd(m map[string][]semver.Version, d Dependency) {
+func addToMap(m map[string][]semver.Version, d Dependency) {
 	versions, ok := m[d.Name]
 	if !ok {
 		m[d.Name] = []semver.Version{d.Version}

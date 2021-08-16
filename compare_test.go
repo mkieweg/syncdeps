@@ -62,7 +62,7 @@ func Test_extractHighestVersion(t *testing.T) {
 	}
 }
 
-func Test_checkAndAdd(t *testing.T) {
+func Test_addToMap(t *testing.T) {
 	type args struct {
 		m map[string][]semver.Version
 		d Dependency
@@ -93,7 +93,7 @@ func Test_checkAndAdd(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			checkAndAdd(tt.args.m, tt.args.d)
+			addToMap(tt.args.m, tt.args.d)
 			if !reflect.DeepEqual(tt.args.m, tt.want) {
 				t.Errorf("extractHighestVersion() = %v, want %v", tt.args.m, tt.want)
 			}

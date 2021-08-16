@@ -55,12 +55,11 @@ func ScanFile(r io.Reader) (map[string][]semver.Version, error) {
 	scanner := bufio.NewScanner(r)
 	for scanner.Scan() {
 		d := Dependency{}
-		n, err := d.Write(trim(scanner.Bytes()))
+		_, err := d.Write(trim(scanner.Bytes()))
 		if err != nil {
 			return nil, err
 		}
-		log.Infof("wrote %v bytes to struct\n", n)
-		checkAndAdd(deps, d)
+		addToMap(deps, d)
 	}
 	log.Infof("Scan found %v dependencies", len(deps))
 	return deps, nil
